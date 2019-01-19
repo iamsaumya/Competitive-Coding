@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1547554946 source:c:\users\saumya pandey\desktop\competitive coding\prime generator\main.cpp
+	<iostream>
+
+1547554916 source:c:\users\saumya pandey\desktop\competitive coding\prime generator\sieveoferatosthenes.cpp
+	<iostream>
+	<math.h>
+	<cstring>
+
