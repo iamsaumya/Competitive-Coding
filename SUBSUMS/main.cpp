@@ -1,5 +1,6 @@
 #include <iostream>
 #include<cstring>
+#include<vector>
 using namespace std;
 int64_t A,B,subsets=0,sum;
 
@@ -33,7 +34,7 @@ int main()
     for(int i=0;i<n1;i++){
         int x;
         cin>>x;
-        v1.push
+        v1.push_back(x);
     }
 
     for(int i=0;i<n1;i++){
