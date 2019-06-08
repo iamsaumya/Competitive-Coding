@@ -1,33 +1,28 @@
-#include <iostream>
-
+#include<bits/stdc++.h>
 using namespace std;
 
 int main()
-{   long long int a;
+{   long long a;
     while(true){
     cin>>a;
     if(a==0)
-        break;
-    bool lights = false;
-    if(a%2==0){
-    for(int i=2;i<=a;i+=2){
-        if(a%i==0)
-            lights = !(lights);
-      }
-      lights = !lights;
+        return 0;
+    bool light = false;
+    for(int i=1;i<=sqrt(a);i++){
+        if(a%i==0){
+            if(a/i==i){
+                light = !(light);
+            }
+            else{
+                light = !light;
+                light = !light;
+            }
+        }
     }
-    else{
-       for(int i=1;i<=a;i+=2){
-        if(a%i==0)
-            lights =!(lights);
-      }
-    }
-    if(lights){
+    if(light)
         cout<<"yes"<<endl;
-    }
-    else {
+    else
         cout<<"no"<<endl;
-    }
     }
     return 0;
 }

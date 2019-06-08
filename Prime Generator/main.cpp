@@ -1,21 +1,23 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 void prime_generator(int a, int b){
     int i,j;
+    bool flag;
     for(i=a;i<=b;i++){
-        for(j=2;j<i;j++){
+        flag = true;
+        for(j = 2;j<=sqrt(i);j++){
             if(i%j==0){
-                break;
+                 flag = false;
+                 break;
             }
         }
-        if(j==i)
-            printf("%d\n",i);
+       if(flag && i!=1)
+          cout<<i<<endl;
     }
-    printf("\n");
 }
-int mains()
+int main()
 {
-    short int number;
+    int number;
     scanf("%d",&number);
     int array[number][2];
     int i;
@@ -26,6 +28,7 @@ int mains()
     }
     for(int i = 0; i<number ; i++){
         prime_generator(array[i][0],array[i][1]);
+        cout<<endl;
     }
     return 0;
 }
