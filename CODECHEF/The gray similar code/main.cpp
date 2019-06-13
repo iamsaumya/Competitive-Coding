@@ -19,9 +19,9 @@ int main()
         return 0;
     }
     else{
-        for(ll i=0;i<n;i++){
-            for(ll j=i+1;j<n;j++){
-                for(ll k=j+1;k<n;k++){
+        for(ll i=0;i<n-3;i++){
+            for(ll j=i+1;j<n-2;j++){
+                for(ll k=j+1;k<n-1;k++){
                     for(ll l=k+1;l<n;l++){
                         if( (v[i]^v[j]^v[k]^v[l]) ==0){
                             cout<<"Yes";
