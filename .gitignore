@@ -1,0 +1,21 @@
+# Do not track these files#
+###########################
+
+*.cdp
+
+*.layout
+
+
+*.o
+*.exe
+
+
+# Do not track contents of these folders#
+
+#########################################
+
+**/bin/
+
+**/obj/
+
+**/bin/Debug/
