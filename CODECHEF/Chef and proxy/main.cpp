@@ -1,40 +1,44 @@
 #include<bits/stdc++.h>
 using namespace std;
-string s;
-float percentage(){
-    float P=0.0;
-    int length = s.length();
-    for(int i =0;i<length;i++){
-        if(s[i]=='P' || s[i]=='p')
-            P++;
-    }
-    return P/(length*1.0);
-}
-
+string temp;
 int main()
 {
-    int t,d;
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+
+    int t,d,p=0;
+    double attendance=0;
     cin>>t;
     int proxy;
     for(int m=0;m<t;m++){
-    cin>>d;
-    cin>>s;
+
+    cin>>d>>temp;
+    string s = temp;
     proxy = 0;
-    int length = s.length();
-    for(int i=2;i<length-2;i++){
+
+    for(int i=0;i<d;i++){
+        if(s[i]=='P')
+            p++;
+    }
+
+    attendance = p/d;
+    int i = 2 ;
+    while(attendance<0.75 && i<(d-2)){
         if(s[i]=='A'){
             if((s[i-1]=='P' || s[i-2]=='P') && (s[i+1]=='P' || s[i+2]=='P')){
-                    s[i]='p';
+                    p++;
+                    s[i]='P';
                     proxy++;
                 }
             }
-        if(percentage()>=0.75){
-            cout<<proxy<<endl;
-            break;
-            }
+        attendance = p/d;
+        i++;
     }
-    if(percentage()<0.75)
-              cout<<"-1"<<endl;
+
+    if(attendance>=0.75)
+        cout<<proxy<<endl;
+    else
+       cout<<"-1"<<endl;
     }
     return 0;
 }
