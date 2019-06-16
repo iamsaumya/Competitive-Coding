@@ -1,7 +1,7 @@
 # Do not track these files#
 ###########################
 
-*.cdp
+*.cbp
 
 *.layout
 
