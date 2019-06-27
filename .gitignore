@@ -8,7 +8,7 @@
 
 *.o
 *.exe
-
+*.depend
 
 # Do not track contents of these folders#
 
