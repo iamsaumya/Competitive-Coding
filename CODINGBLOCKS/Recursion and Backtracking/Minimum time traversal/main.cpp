@@ -1,37 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long int
-vector<int> alltime;
+int ans;
+int vnt[25]={0};
 void minimumTimeTraversal(vector<vector<int>>v, int startEnd[4], int startx, int starty,int totaltime){
-    if((startx==startEnd[2]) && (starty==startEnd[3])){
-        alltime.push_back(totaltime);
-        return;
-    }
-    // 1. Aim is pass starting index to stop the recursion.
-    // calculate time through all the pipelines.
-    // First check for the first pipeline then calculate ending points.... then check whether we can use any other pipelines or not....if the ending point
-    // A for loop for each pipeline if the starting of pipe is greater than skip it. is no such pipe is found then sum it up from final destination.
-    int time,time1;
-    bool Pipelineexist = false;
-    int newstartx=startx,newstarty=starty;
-    int i;
-    for(i=0;i<v.size();i++){
-          vector<int>temp = v[i];
-          if(temp[0]>=startx && temp[1]>=starty){
-              Pipelineexist = true;
-              time =  totaltime + abs(temp[0]-newstartx) + abs(newstarty - temp[1]);;
-              time += temp[4];
-              newstartx = temp[2];
-              newstarty = temp[3];
-              v.erase(v.begin()+i);
-              minimumTimeTraversal(v,startEnd,newstartx,newstarty,time);
-              v.push_back(temp);
-            }
-        }
-    if(!Pipelineexist && i==v.size() ){
-        time1 = totaltime + abs(newstartx-startEnd[2]) + abs(newstarty - startEnd[3]);
-        minimumTimeTraversal(v,startEnd,startEnd[2],startEnd[3],time1);
-    }
+   int ans1 =  totaltime + abs(startx-startEnd[2]) + abs(starty-startEnd[3]);
+   ans = min(ans,ans1);
+
+   for(int i=0;i<v.size();i++){
+     if(vnt[i])
+       continue;
+
+     vector<int>temp = v[i];// vector of pipelines
+     int dis = totaltime + abs(temp[0]-startx) + abs(temp[1]-starty) + temp[4];
+     vnt[i]++;
+     minimumTimeTraversal(v,startEnd,temp[2],temp[3],dis);
+
+     dis = totaltime + abs(temp[2]-startx) + abs(temp[3]-starty) + temp[4];
+     minimumTimeTraversal(v,startEnd,temp[0],temp[1],dis);
+     vnt[i]--;
+   }
 }
 int main() {
    int t,n;
@@ -58,9 +46,9 @@ int main() {
              v.push_back(temp);
              temp.clear();
            }
-           int time = abs(startEnd[0]-startEnd[2])+abs(startEnd[1]-startEnd[3]);
+            ans = abs(startEnd[0]-startEnd[2])+abs(startEnd[1]-startEnd[3]);
            minimumTimeTraversal(v,startEnd,startEnd[0],startEnd[1],0);
-           cout<<"#"<<num++<<" : "<<min(*min_element(alltime.begin(), alltime.end()),time)<<endl;
+           cout<<"#"<<num++<<" : "<<ans<<endl;
           v.clear();
        }
    }
