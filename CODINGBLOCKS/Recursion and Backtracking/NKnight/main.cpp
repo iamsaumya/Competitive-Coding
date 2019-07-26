@@ -83,7 +83,7 @@ void nKnight(char** board, int sti,int stj,int size,int placed){
                 nKnight(new_board,i,j,size,placed-1);
 
                 for(int k=0;k<10;k++){
-                    delete[] new_board[k];
+                    delete new_board[k];
                 }
                 delete[] new_board;
             }
