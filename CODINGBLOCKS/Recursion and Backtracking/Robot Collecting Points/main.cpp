@@ -21,7 +21,7 @@ int makeitMax(int board[12][5], int i, int j, int sum){
         return sum;
     if(board[i][j]==1){
         sum+=board[i][j];
-        cout<<"Found one at "<<i<<" and "<<j<<endl;
+        //cout<<"Found one at "<<i<<" and "<<j<<endl;
     }
     int a = makeitMax(board,i-1,j,sum);
     int b = makeitMax(board,i-1,j+1,sum);
@@ -63,14 +63,6 @@ int main()
             while(heightlowerlimit<=h-5){
                 makeZero(board,heightlowerlimit,heightupperlimit);
               //   cout<<"In here 4"<<endl;
-                cout<<"after zero"<<endl;
-                for(int i=0;i<h;i++){
-                    for(int j=0;j<5;j++){
-                        cout<<board[i][j]<<" ";
-                    }
-                    cout<<endl;
-                }
-                cout<<endl;
                 int max_value = makeitMax(board,h-1,2,0);
                 alltimeMax = max(max_value,alltimeMax);
                 for(int i=0;i<h;i++){
