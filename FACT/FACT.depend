@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1547588085 source:c:\users\saumya pandey\desktop\competitive coding\fact\main.cpp
-	<iostream>
-	<cmath>
-	<stdio.h>
-	<stdlib.h>
-	<conio.h>
-
