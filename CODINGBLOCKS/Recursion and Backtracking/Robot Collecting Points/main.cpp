@@ -1,77 +1,72 @@
 #include <bits/stdc++.h>
 using namespace std;
-int t,h;
-int alltimeMax=INT_MIN;
+int t;
+int h;
+int dp[20][20];
+int temp_board[20][20]={0};
 
-void makeZero(int board[12][5],int hll, int hul){
-    for(int i=hll;i<=hul;i++){
+void makeZero(int board[20][20],int hll){
+
+    for(int i=0;i<20;i++){
         for(int j=0;j<5;j++){
-            if(board[i][j]==-1)
-                board[i][j]=0;
+            dp[i][j] = -1e8;
+        }
+    }
+
+      for(int i=0;i<20;i++){
+         for(int j=0;j<5;j++){
+            temp_board[i][j]=board[i][j];
+          }
+       }
+
+    for(int i=hll;i<hll+5;i++){
+        for(int j=0;j<5;j++){
+            if(temp_board[i][j]==-1)
+                temp_board[i][j]=0;
         }
     }
 }
 
-bool isValid(int i, int j){
-  return (i>=0) && (i<h) && (j>=0) && (j<5);
+int makeitMax(int temp_board[][20], int i, int j){
+
+    if(i==-1)
+         return 0;
+
+    if(dp[i][j]!=-1e8)
+        return dp[i][j];
+
+    int &ans = dp[i][j];
+
+    ans = max(ans,temp_board[i][j]+makeitMax(temp_board,i-1,j));
+    if(j<4)
+      ans = max(ans,temp_board[i][j]+makeitMax(temp_board,i-1,j+1));
+    if(j>0)
+      ans = max(ans,temp_board[i][j]+makeitMax(temp_board,i-1,j-1));
+
+    return ans;
 }
 
-int makeitMax(int board[12][5], int i, int j, int sum){
-    if(!isValid(i,j))
-        return sum;
-    if(board[i][j]==1){
-        sum+=board[i][j];
-        //cout<<"Found one at "<<i<<" and "<<j<<endl;
-    }
-    int a = makeitMax(board,i-1,j,sum);
-    int b = makeitMax(board,i-1,j+1,sum);
-    int c = makeitMax(board,i,j-1,sum);
-
-    int d = max(a,b);
-
-    return max(d,c);
-}
 int main()
 {
-
     cin>>t;
-    int board[12][5]={0};
     while(t--){
-
+        int board[20][20]={0};
         cin>>h;
         for(int i=0;i<h;i++){
             for(int j=0;j<5;j++){
                 cin>>board[i][j];
             }
         }
-
-        int temp_board[12][5];
-        for(int i=0;i<h;i++){
-            for(int j=0;j<5;j++){
-                temp_board[i][j]=board[i][j];
-            }
-        }
-
+        int alltimeMax=-1e8;
         if(h<5){
-              int max_value = makeitMax(board,h-1,2,0);
+              int max_value = makeitMax(board,h,2);
               alltimeMax = max(max_value,alltimeMax);
         }
         else {
-
-            int heightupperlimit = 4;
-            int heightlowerlimit = 0;
-            while(heightlowerlimit<=h-5){
-                makeZero(board,heightlowerlimit,heightupperlimit);
-              //   cout<<"In here 4"<<endl;
-                int max_value = makeitMax(board,h-1,2,0);
-                alltimeMax = max(max_value,alltimeMax);
-                for(int i=0;i<h;i++){
-                    for(int j=0;j<5;j++){
-                        board[i][j]=temp_board[i][j];
-                  }
-                }
-                heightlowerlimit++;
-                heightupperlimit++;
+            for(int hll= 0;hll<h-4;hll++){
+                makeZero(board,hll);
+                int je = makeitMax(temp_board,h,2);
+                alltimeMax = max(alltimeMax,je);
             }
       }
        cout<<alltimeMax<<endl;
