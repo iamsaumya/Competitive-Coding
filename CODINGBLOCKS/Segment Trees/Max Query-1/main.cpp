@@ -1,68 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long int
-class node{
-    public:
-    ll data;
-    ll smallestAmong;
-    node(){
-        data = INT_MAX;
-        smallestAmong = 0;
-    }
-};
+vector<ll>arr(100005);
+vector<ll>tree[400005];
 
-void buildtree(ll *arr, int ss, int se, node *tree, int index){
-    node t = tree[index];
+void buildtree(ll ss, ll se,ll index){
     if(ss==se){
-         tree[index].data = arr[se];
-         tree[index].smallestAmong = 1;
-       // cout<<tree[index].smallestAmong<<endl;
+       tree[index].push_back(arr[ss]);
         return;
     }
 
     ll mid = ss + (se-ss)/2;
-
-    buildtree(arr,ss,mid,tree,2*index);
-    buildtree(arr,mid+1,se,tree,2*index+1);
-    node t1 =tree[2*index];
-    node t2 = tree[2*index+1];
-    t.data = min(t1.data,t2.data);
-    t.smallestAmong = t1.smallestAmong + t2.smallestAmong;
-    //cout<<"for range:"<<ss<<" and " <<se<<":"<<t.smallestAmong<<endl;
-    tree[index]=t;
+    buildtree(ss,mid,2*index);
+    buildtree(mid+1,se,2*index+1);
+    merge(tree[2*index].begin(),tree[2*index].end(), tree[2*index+1].begin(), tree[2*index+1].end(),back_inserter(tree[index]));
     return;
 }
 
-ll query(node *tree, int ss, int se, int l, int r,ll value, int index){
+ll query(ll ss, ll se, ll l, ll r,ll value, ll index){
     if(ss>r || se<l || l>r){
         return 0;
     }
 
     if(ss>=l && se<=r){
-        node t = tree[index];
-        if(t.data>=value){
-            return t.smallestAmong;
-        }
+        return tree[index].size() - (lower_bound(tree[index].begin(),tree[index].end(),value) - tree[index].begin());
     }
 
     ll mid = ss + (se-ss)/2;
-    ll left = query(tree,ss,mid,l,r,value,2*index);
-    ll right = query(tree,mid+1,se,l,r,value,2*index+1);
+    ll left = query(ss,mid,l,r,value,2*index);
+    ll right = query(mid+1,se,l,r,value,2*index+1);
     return left+right;
 }
 
 int main() {
   ll n;
   cin>>n;
-  ll arr[n];
   for(ll i=0;i<n;i++)  cin>>arr[i];
   ll q;
   cin>>q;
-  node *tree = new node[4*n+1];
-  buildtree(arr,0,n-1,tree,1);
+  buildtree(0,n-1,1);
   while(q--){
       ll L,R,K;
       cin>>L>>R>>K;
-      cout<<query(tree,0,n-1,L-1,R-1,K,1)<<endl;
+      cout<<query(0,n-1,L-1,R-1,K,1)<<endl;
   }
 }
