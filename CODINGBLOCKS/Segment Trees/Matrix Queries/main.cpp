@@ -23,7 +23,7 @@ v2d multiply(v2d &a,v2d &b){ // Make a multiply Function.
 	  return c;
 }
 
-void buildtree(int ss, int se,int index){
+void buildtree(int ss, int se, int index){
     if(ss==se){
          for(int j=1;j<=2;j++){
 	        for(int k=1;k<=2;k++){
@@ -79,7 +79,6 @@ int main() {
               cin>>matrix[i][j][k];
         }
     }
-
 
     buildtree(1,n,1);
     v2d temp;
