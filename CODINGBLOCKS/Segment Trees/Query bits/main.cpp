@@ -32,7 +32,7 @@ void updaterange(ll ss, ll se, ll l ,ll r,ll index, ll val){
 
     lazyup(ss,se,index);
 
-    if(ss>r || se<l || l>r){
+    if(ss>r || se<l){
         return;
     }
 
@@ -50,11 +50,13 @@ void updaterange(ll ss, ll se, ll l ,ll r,ll index, ll val){
     updaterange(ss,mid,l,r,2*index,val);
     updaterange(mid+1,se,l,r,2*index+1,val);
 
-    tree[index]=((tree[2*index]%MOD*pow(2,se-mid,MOD)%MOD)%MOD+ tree[2*index+1]%MOD)%MOD;
+    tree[index]=(tree[2*index]*pow(2,se-mid,MOD)%MOD+ tree[2*index+1])%MOD;
     return;
 }
 
 ll query(ll ss, ll se, ll l, ll r, ll index){
+
+     lazyup(ss,se,index);
 
     if(ss>r || se<l){
         return 0;
