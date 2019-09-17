@@ -6,7 +6,6 @@ int arr[100001];
 
 void solve(int n){
     for(int i=1;i<=n;i++) dp[i]=1;
-    int len =1;
     for(int i=n-1;i>=1;--i){
         if((arr[i]>0 && arr[i-1]>0 )||(arr[i]<0 && arr[i-1]<0)){
                dp[i]=1;
