@@ -1,36 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long int
-ll read()
-{
-        ll n=0;
-        char c;int f=0;
-        //fast method to read character
-        c=getchar_unlocked();
-        while(c<'0'||c>'9')
-        {
 
-        if(c=='-')
-        f=1;
-        	c=getchar_unlocked();
-        }
-        while(c>='0'&&c<='9')
-        {
-        	n=n*10+c-'0';
-        	c=getchar_unlocked();
-        }
-        if(!f)
-        return n;
-        else
-        return -n;
-}
 int main()
 {
     int t;
-    t = read();
+    cin>>t;
     while(t--){
-        ll n;
-        n = read();
+        int n;
+        cin>>n;
         ll arr[10001];
         ll dplmax[10001];
         ll dplmin[10001];
@@ -38,7 +16,7 @@ int main()
         ll dprmin[10001];
 
         for(int i=0;i<n;i++) {
-            arr[i] = read();
+            cin>>arr[i];
             dplmax[i]=dplmin[i]=dprmax[i]=dprmin[i]=arr[i];
         }
 
