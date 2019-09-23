@@ -1,6 +1,9 @@
 # Do not track these files#
 ###########################
-
+*.sln
+*vcxproj
+*.filters
+*.user
 *.cbp
 
 *.layout
@@ -14,6 +17,8 @@
 
 #########################################
 
+**/Debug/
+**/.vs/
 **/bin/
 
 **/obj/
