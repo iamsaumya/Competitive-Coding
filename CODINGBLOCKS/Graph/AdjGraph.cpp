@@ -1,6 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
+template<typename T>
+class Graph{
+      map<T,list<T>>adj;
+      public:
+      void addEdge(T u, T v, bool bidir = true){
+          adj[u].push_back(v);
+          if(bidir == true){
+              adj[v].push_back(u);
+          }
+      }
 
+      void printGraph(){
+          for(auto i: adj){
+              cout<<i.first<<"->";
+
+              for(auto j:i.second){
+                  cout<<j<<",";
+              }
+              cout<<endl;
+          }
+      }
+};
+
+
+/* For integer Data type 
 class Graph{
     int V;
     list<int> *adj;
@@ -32,15 +56,15 @@ void Graph::printGraph(){
     }
 }
 
+*/ 
+
 
 int main() {
-    Graph g(5);
-    g.addEdge(0,1);
-    g.addEdge(0,4);
-    g.addEdge(1,2);
-    g.addEdge(1,3);
-    g.addEdge(1,4);
-    g.addEdge(4,3);
-    g.addEdge(2,3);
+    Graph<string>g;
+    g.addEdge("Putin","Trump",false);
+    g.addEdge("Putin","Modi",false);
+    g.addEdge("Putin","Pope",false);
+    g.addEdge("Modi","Trump",true);
+    g.addEdge("Modi","Yogi",true);
     g.printGraph();
 }
