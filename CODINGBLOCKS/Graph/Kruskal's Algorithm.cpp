@@ -48,7 +48,7 @@ void kruskal(Edge edge[], int V, int E){
         set[i].rank = 0;
         set[i].parent = i;
     }
-    
+
     int counter = 0;
     for(int i = 0;i<E;i++){
         Edge temp = edge[i];
@@ -64,7 +64,7 @@ void kruskal(Edge edge[], int V, int E){
         if(counter==V-1)
             break;
     }
-
+    cout<<"ans"<<endl;
     for(int i = 0;i<V-1;i++){
         cout<<output[i].src<<" "<<output[i].dest<<" "<<output[i].weight<<endl;
     }
